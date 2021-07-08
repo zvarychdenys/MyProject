@@ -1,20 +1,25 @@
+
 from random import random
 
-list1 = []
 
-amount = (int(input("How many numbers do you want?")))
-n = (int(input("What range do you want?")))
+class Random():
+
+    list1 = []
+
+    def __init__(self):
+        self.numb = (int(input("How many numbers do you want?")))
+        self.range = (int(input("What range do you want?")))
+
+    def random_values(self):
+        if self.numb <= 0:
+            print("Please write a number greater than 0")
+
+        else:
+            for i in range(self.numb):
+                self.list1.append(int(random() * self.range))
+
+            return self.list1
 
 
-def random_values(arr, x, rang):
-    if x <= 0:
-        print("Please write a number greater than 0")
-
-    else:
-        for i in range(x):
-            arr.append(int(random()* rang))
-
-        return arr
-
-
-print(random_values(list1, amount, n))
+r = Random()
+print(r.random_values())
