@@ -4,43 +4,41 @@ city = input("In which city do you want to find out the weather?\n")
 owm = OWM('37ace9ba0da02f3957cb68cae063f86b')  # free OWM API key
 mgr = owm.weather_manager()
 
-observation = mgr.weather_at_place(city)
-w = observation.weather
+
+class WeatherInCity():
+
+    def __init__(self, town):
+        observation = mgr.weather_at_place(town)
+        self.w = observation.weather
+        status = self.w.detailed_status
+
+        print(status + " in " + town)
+
+    def rain(self):
+        raining = (list(self.w.rain))
+
+        if not raining:
+            print("It's not raining")
+        else:
+            print("It's raining,you need take an umbrella")
+
+        return raining
+
+    def wind(self):
+        wn = self.w.wind()
+        speed_wind = wn['speed']
+
+        return speed_wind
+
+    def temperature(self):
+
+        t = self.w.temperature('celsius')['temp']
+
+        return t
 
 
-def status(town):
+weather = WeatherInCity(city)
+print("In " + city + ", the temperature is " + str(weather.temperature()) + " ℃")
+print("Speed wind in " + city + " is " + str(weather.wind()) + " km/h")
 
-   print(w.detailed_status)
-
-
-def rain(town):
-
-    arr = (list(w.rain))
-
-    if not arr:
-        print("It's not raining")
-    else:
-        print("It's raining,you can take an umbrella")
-
-    return arr
-
-
-def wind(town):
-    wn = w.wind()
-    speed_wind = wn['speed']
-
-    return speed_wind
-
-
-def temperature(town):
-
-    t = w.temperature('celsius')['temp']
-
-    return t
-
-
-print("In " + city + ", the temperature is " + str(temperature(city)) + " ℃")
-print("Speed wind in " + city + " is " + str(wind(city)) + " km/h")
-
-rain(city)
-status(city)
+(weather.rain())
