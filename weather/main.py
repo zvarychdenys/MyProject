@@ -39,6 +39,9 @@ class WeatherInCity():
 
 weather = WeatherInCity(city)
 
-print("In " + city + ",the temperature is " + str(weather.temperature()) + " ℃")
-print("Speed wind in " + city + " is " + str(weather.wind()) + " km/h")
 (weather.rain())
+print("In " + city + ", the temperature is " + str(weather.temperature()) + " ℃")
+print("Speed wind in " + city + " is " + str(weather.wind()) + " km/h\n")
+
+
+input('Press ENTER to exit')
